@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goh Wee Ken | Data Science Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafaf7;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --border: #e5e5e0;
+            --accent: #2d5f3f;
+            --accent-bg: #eaf3ec;
+            --tag-bg: #f0f0ea;
+            --tag-active-bg: #1a1a1a;
+            --tag-active-text: #fafaf7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            font-size: 16px;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        .logo:hover { text-decoration: none; }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        /* ─── SECTIONS ─── */
+        section {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-of-type { border-bottom: none; }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+
+        /* ─── HERO ─── */
+        .hero { padding: 4rem 0 3rem; }
+
+        .hero .role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--text);
+            max-width: 620px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+        .hero .links a {
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        /* ─── ABOUT ─── */
+        .about p { color: var(--text); max-width: 680px; }
+
+        .about strong { color: var(--text); font-weight: 600; }
+
+        /* ─── SKILLS ─── */
+        .skill-group { margin-bottom: 1.5rem; }
+
+        .skill-group:last-child { margin-bottom: 0; }
+
+        .skill-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 0.6rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-list span {
+            background: var(--tag-bg);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        /* ─── PROJECTS ─── */
+        .filter-intro {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .filter-tag {
+            background: var(--tag-bg);
+            color: var(--text);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .filter-tag:hover {
+            background: var(--accent-bg);
+            color: var(--accent);
+        }
+
+        .filter-tag.active {
+            background: var(--tag-active-bg);
+            color: var(--tag-active-text);
+        }
+
+        .clear-btn {
+            background: transparent;
+            color: var(--accent);
+            font-size: 0.82rem;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            padding: 0.3rem 0.5rem;
+            text-decoration: underline;
+            display: none;
+            margin-bottom: 1rem;
+        }
+
+        .clear-btn.visible { display: inline-block; }
+
+        .project-group {
+            margin-top: 2rem;
+        }
+
+        .project-group-title {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-group.hidden { display: none; }
+
+        .project {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project:last-child { border-bottom: none; }
+
+        .project.hidden { display: none; }
+
+        .project-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .project-head h3 { margin-bottom: 0; }
+
+        .project-head a {
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .project p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .project-tech button {
+            background: transparent;
+            color: var(--text-muted);
+            padding: 0.2rem 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.15s;
+        }
+
+        .project-tech button:hover {
+            background: var(--accent-bg);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .project-tech button.matched {
+            background: var(--tag-active-bg);
+            color: var(--tag-active-text);
+            border-color: var(--tag-active-bg);
+        }
+
+        .no-results {
+            display: none;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .no-results.visible { display: block; }
+
+        /* ─── CONTACT ─── */
+        .contact p { color: var(--text); }
+
+        .contact-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .contact-list li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            text-align: center;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6rem; }
+            .hero { padding: 2.5rem 0 2rem; }
+            section { padding: 2.5rem 0; }
+            nav ul { gap: 1rem; }
+            nav a { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <a href="#" class="logo">Goh Wee Ken</a>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <p class="role">Data Science · Analytics · Automation</p>
+        <h1>Goh Wee Ken</h1>
+        <p class="tagline">Technical Support Engineer at MiLA Asia with a Master's in Data Science. I build end-to-end data pipelines, ML models, and automation workflows — bridging engineering discipline with data-driven problem solving.</p>
+        <div class="links">
+            <a href="https://github.com/WeeKen99" target="_blank">GitHub →</a>
+            <a href="https://www.linkedin.com/in/kengoh99/" target="_blank">LinkedIn →</a>
+            <a href="mailto:weeken69@gmail.com">Email →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="container">
+        <h2>About</h2>
+        <p>I hold a <strong>Master of Data Science</strong> from Universiti Malaya (CGPA 3.97) and a <strong>Bachelor's in Civil Engineering</strong> from Universiti Sains Malaysia. My engineering background shapes how I approach data — structured, first-principles, and focused on real-world impact.</p>
+        <p>Currently based in Singapore, I work at <strong>MiLA Asia</strong> on software troubleshooting, data analysis (Python & SQL), market research, and stakeholder training. I also take on DXP consulting projects and continuously build data science projects to explore new techniques hands-on.</p>
+        <p>My core interests: <strong>machine learning</strong>, <strong>NLP &amp; RAG systems</strong>, <strong>data engineering on GCP</strong>, and <strong>workflow automation</strong>.</p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container">
+        <h2>Skills</h2>
+        <div class="skill-group">
+            <p class="skill-label">Programming & Data</p>
+            <div class="skill-list">
+                <span>Python</span><span>SQL</span><span>R</span><span>Pandas</span><span>NumPy</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <p class="skill-label">Machine Learning</p>
+            <div class="skill-list">
+                <span>scikit-learn</span><span>XGBoost</span><span>TensorFlow</span><span>PyTorch</span><span>SVM</span><span>LSTM</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <p class="skill-label">NLP & LLM</p>
+            <div class="skill-list">
+                <span>HuggingFace</span><span>mBERT</span><span>DistilBERT</span><span>FAISS</span><span>RAG</span><span>Groq API</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <p class="skill-label">Data Engineering & Cloud</p>
+            <div class="skill-list">
+                <span>GCP</span><span>BigQuery</span><span>Cloud Storage</span><span>Dataprep</span><span>ETL</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <p class="skill-label">Web & Deployment</p>
+            <div class="skill-list">
+                <span>FastAPI</span><span>Streamlit</span><span>Docker</span><span>Git</span><span>VPS</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <p class="skill-label">Visualization & Automation</p>
+            <div class="skill-list">
+                <span>Power BI</span><span>Matplotlib</span><span>Seaborn</span><span>n8n</span><span>Gemini AI</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <h2>Projects</h2>
+        <p class="filter-intro">Click any keyword below to filter projects by technology. You can also click the tech tag on any project card.</p>
+        <div class="filter-tags" id="filterTags">
+            <!-- Filter tags injected by JS -->
+        </div>
+        <button class="clear-btn" id="clearBtn">Clear filter ×</button>
+
+        <div id="projectsContainer">
+
+            <!-- DATA ENGINEERING -->
+            <div class="project-group" data-group="Data Engineering">
+                <p class="project-group-title">Data Engineering</p>
+
+                <div class="project" data-tech="GCP, Cloud Storage, Dataprep, BigQuery, Power BI">
+                    <div class="project-head">
+                        <h3>GCP Renewable Energy Pipeline</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>End-to-end cloud data pipeline for renewable energy data — ingestion, transformation, warehousing, and visualization on Google Cloud.</p>
+                    <div class="project-tech">
+                        <button>GCP</button><button>Cloud Storage</button><button>Dataprep</button><button>BigQuery</button><button>Power BI</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MACHINE LEARNING -->
+            <div class="project-group" data-group="Machine Learning">
+                <p class="project-group-title">Machine Learning</p>
+
+                <div class="project" data-tech="XGBoost, LSTM, FastAPI, Streamlit, Python">
+                    <div class="project-head">
+                        <h3>Real-Time Traffic Congestion Predictor</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>Hybrid ML model combining XGBoost and LSTM for real-time traffic prediction, deployed with FastAPI and Streamlit.</p>
+                    <div class="project-tech">
+                        <button>XGBoost</button><button>LSTM</button><button>FastAPI</button><button>Streamlit</button><button>Python</button>
+                    </div>
+                </div>
+
+                <div class="project" data-tech="Python, scikit-learn, XGBoost">
+                    <div class="project-head">
+                        <h3>Customer Churn Predictor</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>Predictive model for the Malaysian telecom sector — identifying at-risk customers to improve retention strategies.</p>
+                    <div class="project-tech">
+                        <button>Python</button><button>scikit-learn</button><button>XGBoost</button>
+                    </div>
+                </div>
+
+                <div class="project" data-tech="XGBoost, SVM, Streamlit, Python">
+                    <div class="project-head">
+                        <h3>Alzheimer's Prediction Model</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>Multi-model comparison (XGBoost, SVM, Decision Trees) for early Alzheimer's prediction, with a Streamlit interface.</p>
+                    <div class="project-tech">
+                        <button>XGBoost</button><button>SVM</button><button>Streamlit</button><button>Python</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NLP & RAG -->
+            <div class="project-group" data-group="NLP & RAG">
+                <p class="project-group-title">NLP &amp; RAG</p>
+
+                <div class="project" data-tech="mBERT, SVM, HuggingFace, Python">
+                    <div class="project-head">
+                        <h3>Multilingual Hate Speech Detection</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>Multilingual hate speech classifier using mBERT and SVM, covering 14 identity groups for content moderation.</p>
+                    <div class="project-tech">
+                        <button>mBERT</button><button>SVM</button><button>HuggingFace</button><button>Python</button>
+                    </div>
+                </div>
+
+                <div class="project" data-tech="FAISS, FastAPI, Streamlit, Groq API, Python">
+                    <div class="project-head">
+                        <h3>Research Paper Q&amp;A Engine</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>RAG-powered Q&amp;A system for research papers — semantic search with sentence-transformers and LLM-generated answers.</p>
+                    <div class="project-tech">
+                        <button>FAISS</button><button>FastAPI</button><button>Streamlit</button><button>Groq API</button><button>Python</button>
+                    </div>
+                </div>
+
+                <div class="project" data-tech="DistilBERT, FAISS, Python">
+                    <div class="project-head">
+                        <h3>Sentiment Analysis Pipeline</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>Full NLP-to-LLM-to-RAG learning arc on Amazon Beauty reviews — from TF-IDF baselines to DistilBERT to RAG.</p>
+                    <div class="project-tech">
+                        <button>DistilBERT</button><button>FAISS</button><button>Python</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AUTOMATION -->
+            <div class="project-group" data-group="Automation">
+                <p class="project-group-title">Automation</p>
+
+                <div class="project" data-tech="n8n, Gemini AI">
+                    <div class="project-head">
+                        <h3>AI Recruitment Automation Pipeline</h3>
+                        <a href="https://github.com/WeeKen99" target="_blank">View on GitHub →</a>
+                    </div>
+                    <p>Automated recruitment workflow using n8n and Gemini AI — resume parsing, candidate scoring, and notifications.</p>
+                    <div class="project-tech">
+                        <button>n8n</button><button>Gemini AI</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="no-results" id="noResults">No projects match this filter.</div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2>Contact</h2>
+        <p>I'm open to data science, analytics, and data engineering opportunities. Feel free to reach out.</p>
+        <ul class="contact-list">
+            <li>GitHub: <a href="https://github.com/WeeKen99" target="_blank">github.com/WeeKen99</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/kengoh99/" target="_blank">linkedin.com/in/YOUR-LINKEDIN</a></li>
+            <li>Email: <a href="mailto:weeken69@gmail.com">weeken69@gmail.com</a></li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 Goh Wee Ken</p>
+    </div>
+</footer>
+
+<script>
+    // Collect all unique tech tags from projects
+    const allProjects = document.querySelectorAll('.project');
+    const techSet = new Set();
+    allProjects.forEach(p => {
+        p.dataset.tech.split(',').map(t => t.trim()).forEach(t => techSet.add(t));
+    });
+
+    // Render filter tags alphabetically
+    const filterTagsEl = document.getElementById('filterTags');
+    [...techSet].sort().forEach(tech => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-tag';
+        btn.textContent = tech;
+        btn.dataset.tech = tech;
+        filterTagsEl.appendChild(btn);
+    });
+
+    const clearBtn = document.getElementById('clearBtn');
+    const noResults = document.getElementById('noResults');
+    let activeFilter = null;
+
+    function applyFilter(tech) {
+        activeFilter = tech;
+
+        // Update top filter tag styling
+        document.querySelectorAll('.filter-tag').forEach(t => {
+            t.classList.toggle('active', t.dataset.tech === tech);
+        });
+
+        // Highlight matching tech buttons on project cards
+        document.querySelectorAll('.project-tech button').forEach(b => {
+            b.classList.toggle('matched', tech !== null && b.textContent === tech);
+        });
+
+        let visibleCount = 0;
+
+        // Show/hide projects
+        allProjects.forEach(p => {
+            const techs = p.dataset.tech.split(',').map(t => t.trim());
+            if (tech === null || techs.includes(tech)) {
+                p.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                p.classList.add('hidden');
+            }
+        });
+
+        // Hide empty category groups
+        document.querySelectorAll('.project-group').forEach(g => {
+            const visible = g.querySelectorAll('.project:not(.hidden)');
+            g.classList.toggle('hidden', visible.length === 0);
+        });
+
+        clearBtn.classList.toggle('visible', tech !== null);
+        noResults.classList.toggle('visible', visibleCount === 0);
+    }
+
+    // Top filter clicks (toggle)
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            if (activeFilter === tag.dataset.tech) {
+                applyFilter(null);
+            } else {
+                applyFilter(tag.dataset.tech);
+            }
+        });
+    });
+
+    // Project card tag clicks
+    document.querySelectorAll('.project-tech button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyFilter(btn.textContent);
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Clear filter
+    clearBtn.addEventListener('click', () => applyFilter(null));
+</script>
+
+</body>
+</html>
