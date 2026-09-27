@@ -118,6 +118,15 @@ section.alt { background: var(--bg-soft); }
 .skill { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
 .skill h3 { font-size: .95rem; margin-bottom: 10px; }
 
+/* EVENTS */
+.soon { display: flex; align-items: center; gap: 24px; background: #fff; border: 1px dashed #cbd5e1; border-radius: var(--radius); padding: 32px; }
+.soon-icon { flex: none; width: 56px; height: 56px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+.soon-icon svg { width: 28px; height: 28px; }
+.soon h3 { font-size: 1.1rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.soon-badge { font-family: 'Inter'; font-size: .75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #fef3c7; color: #92400e; }
+.soon p { color: var(--muted); margin-top: 4px; font-size: .95rem; }
+@media (max-width: 640px) { .soon { flex-direction: column; align-items: flex-start; padding: 24px; } }
+
 /* CONTACT */
 .contact { background: var(--ink); color: #cbd5e1; border-radius: 20px; padding: 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
 .contact h2 { color: #fff; font-size: clamp(1.7rem, 3.2vw, 2.3rem); font-weight: 800; }
@@ -165,6 +174,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
       <li><a href="#projects">Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#events">Events</a></li>
       <li><a href="#contact" class="btn btn-primary btn-sm">Contact me</a></li>
     </ul>
   </div>
@@ -407,8 +417,26 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
   </div>
 </section>
 
+<!-- EVENTS -->
+<section class="block alt" id="events">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Community</p>
+      <h2>Tech events &amp; learning</h2>
+      <p>Conferences, meetups, workshops and hackathons I've taken part in.</p>
+    </div>
+    <div class="soon reveal">
+      <div class="soon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
+      <div>
+        <h3>Event highlights <span class="soon-badge">Coming soon</span></h3>
+        <p>Photos and takeaways from the tech events I attend will be shared here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
-<section class="block" id="contact" style="padding-top:0">
+<section class="block" id="contact">
   <div class="wrap">
     <div class="contact reveal">
       <div>
