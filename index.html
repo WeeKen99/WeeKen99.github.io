@@ -102,6 +102,7 @@ section.alt { background: var(--bg-soft); }
 .pcard.hidden { display: none; }
 .pcard h3 { font-size: 1.05rem; margin: 6px 0 8px; }
 .pcard p { font-size: .9rem; flex: 1; }
+.kaggle { color: #0e9fd8; }
 .pcard .result { margin: 12px 0; font-size: .82rem; }
 
 /* ABOUT + SKILLS */
@@ -126,7 +127,7 @@ section.alt { background: var(--bg-soft); }
 .doc-icon svg { width: 24px; height: 24px; }
 .doc h3 { font-size: 1.05rem; }
 .doc-meta { font-size: .88rem; color: var(--muted); margin-top: 2px; }
-.doc > p { font-size: .92rem; margin: 14px 0 18px; flex: 1; }
+.doc-actions { margin-top: 20px; }
 .lock { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #fef3c7; color: #92400e; margin-top: 8px; }
 .lock svg { width: 12px; height: 12px; }
 .doc-actions { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -154,13 +155,54 @@ section.alt { background: var(--bg-soft); }
 
 footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .88rem; }
 
-/* REVEAL */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+/* MOTION */
+.progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: linear-gradient(90deg, var(--accent), #60a5fa); transform-origin: 0 50%; transform: scaleX(0); z-index: 60; }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+.reveal.from-left { transform: translateX(-32px); }
+.reveal.from-right { transform: translateX(32px); }
+.reveal.zoom { transform: scale(.94); }
 .reveal.in { opacity: 1; transform: none; }
+/* while revealing, the reveal timing wins over each card's own hover transition */
+.reveal.in:not(.done) { transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+.sec-head .eyebrow { display: inline-flex; align-items: center; gap: 10px; }
+.sec-head .eyebrow::before { content: ''; height: 2px; width: 0; background: var(--accent); border-radius: 2px; transition: width .6s .2s ease; }
+.sec-head.in .eyebrow::before { width: 28px; }
+.hero > .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero > .wrap > :nth-child(2) { animation-delay: .1s; }
+.hero > .wrap > :nth-child(3) { animation-delay: .2s; }
+.hero > .wrap > :nth-child(4) { animation-delay: .3s; }
+.hero > .wrap > :nth-child(5) { animation-delay: .45s; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.hero { position: relative; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; pointer-events: none; z-index: 0; animation: drift 18s ease-in-out infinite alternate; }
+.blob.b1 { width: 420px; height: 420px; background: #bfdbfe; top: 40px; right: -160px; }
+.blob.b2 { width: 280px; height: 280px; background: #ddd6fe; bottom: 60px; right: 28%; animation-duration: 22s; }
+.hero .wrap { position: relative; z-index: 1; }
+@keyframes drift { to { transform: translate(-60px, 40px) scale(1.1); } }
+.hl { background: linear-gradient(90deg, var(--accent), #7c3aed, var(--accent)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 6s linear infinite; }
+@keyframes shine { to { background-position: 200% center; } }
+.badge::before { animation: pulse 2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(5,150,105,.45); } 100% { box-shadow: 0 0 0 10px rgba(5,150,105,0); } }
+.stat, .skill, .edu-item, .doc { transition: transform .25s, box-shadow .25s, border-color .25s; }
+.stat:hover, .skill:hover, .edu-item:hover, .doc:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.fcard-img img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.fcard:hover .fcard-img img { transform: scale(1.05); }
+.pcard { transition: border-color .15s, box-shadow .25s, transform .25s; }
+.pcard:hover { transform: translateY(-4px); }
+.pcard.pop { animation: pop .45s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
+@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+.tags span { transition: background .2s, border-color .2s, color .2s; }
+.skill:hover .tags span { border-color: #bfdbfe; background: var(--accent-soft); color: var(--accent-dark); }
+.nav-links a:not(.btn) { position: relative; }
+.nav-links a.active:not(.btn) { color: var(--ink); }
+.nav-links a:not(.btn)::after { content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 100%; background: var(--accent); border-radius: 2px; transform: scaleX(0); transition: transform .25s; }
+.nav-links a.active:not(.btn)::after, .nav-links a:not(.btn):hover::after { transform: scaleX(1); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .fcard, .btn { transition: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  .hl { color: var(--accent); background: none; }
+  .progress { display: none; }
 }
 
 /* RESPONSIVE */
@@ -180,6 +222,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 
 <nav id="nav">
   <div class="wrap nav-inner">
@@ -196,6 +239,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 </nav>
 
 <header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
   <div class="wrap">
     <span class="badge">Open to data roles</span>
     <h1>Data Science graduate who turns messy data into <span class="hl">decisions that matter</span>.</h1>
@@ -211,7 +255,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="stat-num">3.98</div><div class="stat-label">Master's CGPA</div></div>
+      <div class="stat"><div class="stat-num" data-count="3.98" data-dec="2">3.98</div><div class="stat-label">Master's CGPA</div></div>
       <div class="stat"><div class="stat-num" id="projCount">12</div><div class="stat-label">Projects built</div></div>
       <div class="stat"><div class="stat-num">MSc</div><div class="stat-label">Data Science, UM</div></div>
       <div class="stat"><div class="stat-num">BEng</div><div class="stat-label">Civil Engineering, USM</div></div>
@@ -286,6 +330,15 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
         <div><span class="result">4-stage cloud pipeline</span></div>
         <div class="tags"><span>GCP</span><span>BigQuery</span><span>Dataprep</span><span>Power BI</span></div>
         <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/01-renewable-energy-powerbi" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <article class="pcard" data-cat="Machine Learning">
+        <span class="cat">Machine Learning · <span class="kaggle">Kaggle</span></span>
+        <h3>EV Purchase Prediction (Kaggle Playground)</h3>
+        <p>My first Kaggle competition: 669k rows, LightGBM and CatBoost with in-fold target encoding, binned and interaction features, and a 4-model blend.</p>
+        <div><span class="result">CV ROC AUC 0.9411 → 0.9460</span></div>
+        <div class="tags"><span>LightGBM</span><span>CatBoost</span><span>scikit-learn</span><span>Python</span></div>
+        <a class="link" href="https://github.com/WeeKen99/kaggle-ev-purchase-prediction" target="_blank" rel="noopener">View on GitHub →</a>
       </article>
 
       <article class="pcard" data-cat="Machine Learning">
@@ -407,12 +460,12 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
       <h2>Engineering rigour, data science toolkit</h2>
     </div>
     <div class="about">
-      <div class="about-text reveal">
+      <div class="about-text reveal from-left">
         <p>Support engineer with a dual background in <strong>Data Science (Master's)</strong> and <strong>Traffic Engineering</strong>, trained in data analysis, dashboard development, and machine learning model implementation.</p>
         <p>Familiar with <strong>Python/SQL</strong> programming, <strong>Power BI/Streamlit</strong> visualisation, and prediction modelling for traffic and infrastructure data.</p>
         <p>Eager to apply combined engineering and analytical skills to drive <strong>data-driven decision-making</strong> in traffic operations and road asset management.</p>
       </div>
-      <div class="edu reveal">
+      <div class="edu reveal from-right">
         <div class="edu-item">
           <div class="edu-icon">MSc</div>
           <div>
@@ -460,7 +513,6 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
             <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Available on request</span>
           </div>
         </div>
-        <p>Official confirmation that the Master of Data Science has been conferred: CGPA 3.98, Pass with Distinction.</p>
         <div class="doc-actions">
           <a class="btn btn-primary btn-sm" href="mailto:weeken69@gmail.com?subject=Request%3A%20Completion%20of%20Studies%20letter%20%E2%80%94%20Goh%20Wee%20Ken&amp;body=Hi%20Wee%20Ken%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20Could%20you%20please%20share%20a%20copy%20of%20your%20Completion%20of%20Studies%20letter%3F%0A%0AThank%20you.">Request by email</a>
           <a class="btn btn-outline btn-sm" href="https://wa.me/60143012841?text=Hi%20Wee%20Ken%2C%20I%27d%20like%20to%20request%20a%20copy%20of%20your%20Completion%20of%20Studies%20letter." target="_blank" rel="noopener">WhatsApp</a>
@@ -475,7 +527,6 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
             <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Available on request</span>
           </div>
         </div>
-        <p>Module-by-module grades across 42 credits, including Applied Machine Learning, NLP, Big Data and Parallel Computing.</p>
         <div class="doc-actions">
           <a class="btn btn-primary btn-sm" href="mailto:weeken69@gmail.com?subject=Request%3A%20Academic%20transcript%20%E2%80%94%20Goh%20Wee%20Ken&amp;body=Hi%20Wee%20Ken%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20Could%20you%20please%20share%20a%20copy%20of%20your%20Academic%20transcript%3F%0A%0AThank%20you.">Request by email</a>
           <a class="btn btn-outline btn-sm" href="https://wa.me/60143012841?text=Hi%20Wee%20Ken%2C%20I%27d%20like%20to%20request%20a%20copy%20of%20your%20Academic%20transcript." target="_blank" rel="noopener">WhatsApp</a>
@@ -506,7 +557,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 <!-- CONTACT -->
 <section class="block" id="contact">
   <div class="wrap">
-    <div class="contact reveal">
+    <div class="contact reveal zoom">
       <div>
         <h2>Let's work together</h2>
         <p>I'm open to data science, analytics and data engineering roles. The fastest way to reach me is WhatsApp, email or LinkedIn.</p>
@@ -540,15 +591,57 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 const nav = document.getElementById('nav');
 addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
 
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Scroll progress bar
+const progress = document.getElementById('progress');
+function onScroll() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+}
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Project cards also reveal; cards in the same row arrive one after another
+document.querySelectorAll('#grid .pcard').forEach(c => c.classList.add('reveal'));
+document.querySelectorAll('.featured, .grid, .skills, .docs').forEach(group => {
+  [...group.children].forEach((el, i) => el.style.setProperty('--d', `${(i % 3) * 0.1}s`));
+});
+
 // Scroll reveal
 const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}), { threshold: 0.1 });
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in');
+  setTimeout(() => e.target.classList.add('done'), 1100);
+  io.unobserve(e.target);
+}), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Count up the hero numbers once
+function countUp(el) {
+  const target = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), t0 = performance.now();
+  (function tick(t) {
+    const k = Math.min((t - t0) / 1200, 1), eased = 1 - Math.pow(1 - k, 3);
+    el.textContent = (target * eased).toFixed(dec);
+    if (k < 1) requestAnimationFrame(tick);
+  })(t0);
+  // guarantee the real value if animation frames are paused (e.g. background tab)
+  setTimeout(() => { el.textContent = target.toFixed(dec); }, 1400);
+}
+
+// Underline the nav link for the section in view
+const links = [...document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)')];
+const spy = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+links.forEach(a => { const sec = document.querySelector(a.getAttribute('href')); if (sec) spy.observe(sec); });
 
 // Project count + category tabs
 const cards = [...document.querySelectorAll('#grid .pcard')];
-document.getElementById('projCount').textContent = cards.length;
+const projCount = document.getElementById('projCount');
+projCount.textContent = cards.length;
+projCount.dataset.count = cards.length;
+if (!reduceMotion) setTimeout(() => document.querySelectorAll('[data-count]').forEach(countUp), 500);
 const cats = ['All', ...new Set(cards.map(c => c.dataset.cat))];
 const tabs = document.getElementById('tabs');
 cats.forEach((cat, i) => {
@@ -558,7 +651,17 @@ cats.forEach((cat, i) => {
   b.innerHTML = `${cat}<span class="n">${n}</span>`;
   b.addEventListener('click', () => {
     tabs.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === b));
-    cards.forEach(c => c.classList.toggle('hidden', cat !== 'All' && c.dataset.cat !== cat));
+    let shown = 0;
+    cards.forEach(c => {
+      const hide = cat !== 'All' && c.dataset.cat !== cat;
+      c.classList.toggle('hidden', hide);
+      c.classList.remove('pop');
+      if (!hide && !reduceMotion) {
+        void c.offsetWidth; // restart the animation
+        c.style.setProperty('--d', `${shown++ * 0.05}s`);
+        c.classList.add('pop');
+      }
+    });
   });
   tabs.appendChild(b);
 });
