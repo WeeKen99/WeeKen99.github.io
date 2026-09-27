@@ -99,7 +99,10 @@ section.alt { background: var(--bg-soft); }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .pcard { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; transition: border-color .15s, box-shadow .15s; }
 .pcard:hover { border-color: #cbd5e1; box-shadow: var(--shadow); }
-.pcard.hidden { display: none; }
+.pcard.hidden, .pcard.collapsed { display: none; }
+.more-wrap { display: flex; justify-content: center; margin-top: 28px; }
+.more-wrap .btn svg { transition: transform .25s; }
+.more-wrap .btn[aria-expanded="true"] svg { transform: rotate(180deg); }
 .pcard h3 { font-size: 1.05rem; margin: 6px 0 8px; }
 .pcard p { font-size: .9rem; flex: 1; }
 .pbadge.kaggle { color: #0e9fd8; }
@@ -298,6 +301,12 @@ footer .dot-sep { margin: 0 6px; }
     <div class="grid" id="grid">
 <!-- @PROJECTS -->
     </div>
+    <div class="more-wrap">
+      <button class="btn btn-outline" id="showMore" aria-controls="grid" aria-expanded="false" hidden>
+        <span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -491,6 +500,38 @@ const projCount = document.getElementById('projCount');
 projCount.textContent = cards.length;
 projCount.dataset.count = cards.length;
 if (!reduceMotion) setTimeout(() => document.querySelectorAll('[data-count]').forEach(countUp), 500);
+// Category tabs, showing the first VISIBLE projects of the chosen category with a button for the rest
+const VISIBLE = 6;
+const showMore = document.getElementById('showMore');
+let currentCat = 'All', expanded = false;
+
+function render(animateFrom) {
+  const inCat = cards.filter(c => currentCat === 'All' || c.dataset.cat === currentCat);
+  let shown = 0;
+  cards.forEach(c => {
+    const pos = inCat.indexOf(c);
+    c.classList.toggle('hidden', pos === -1);
+    c.classList.toggle('collapsed', pos >= VISIBLE && !expanded);
+    const visible = pos !== -1 && (pos < VISIBLE || expanded);
+    if (visible && pos >= animateFrom && !reduceMotion) {
+      c.classList.remove('pop');
+      void c.offsetWidth; // restart the animation
+      c.style.setProperty('--d', `${shown++ * 0.05}s`);
+      c.classList.add('pop');
+    }
+  });
+  const extra = inCat.length - VISIBLE;
+  showMore.hidden = extra <= 0;
+  showMore.setAttribute('aria-expanded', expanded);
+  showMore.querySelector('span').textContent = expanded ? 'Show fewer' : `Show all ${inCat.length} projects`;
+}
+
+showMore.addEventListener('click', () => {
+  expanded = !expanded;
+  render(expanded ? VISIBLE : Infinity);
+  if (!expanded) document.getElementById('all-projects').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+});
+
 const cats = ['All', ...new Set(cards.map(c => c.dataset.cat))];
 const tabs = document.getElementById('tabs');
 cats.forEach((cat, i) => {
@@ -500,20 +541,13 @@ cats.forEach((cat, i) => {
   b.innerHTML = `${cat}<span class="n">${n}</span>`;
   b.addEventListener('click', () => {
     tabs.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === b));
-    let shown = 0;
-    cards.forEach(c => {
-      const hide = cat !== 'All' && c.dataset.cat !== cat;
-      c.classList.toggle('hidden', hide);
-      c.classList.remove('pop');
-      if (!hide && !reduceMotion) {
-        void c.offsetWidth; // restart the animation
-        c.style.setProperty('--d', `${shown++ * 0.05}s`);
-        c.classList.add('pop');
-      }
-    });
+    currentCat = cat;
+    expanded = false;
+    render(0);
   });
   tabs.appendChild(b);
 });
+render(Infinity);
 </script>
 </body>
 </html>
