@@ -118,6 +118,20 @@ section.alt { background: var(--bg-soft); }
 .skill { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
 .skill h3 { font-size: .95rem; margin-bottom: 10px; }
 
+/* DOCUMENTS */
+.docs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.doc { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; }
+.doc-top { display: flex; gap: 16px; align-items: flex-start; }
+.doc-icon { flex: none; width: 48px; height: 48px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+.doc-icon svg { width: 24px; height: 24px; }
+.doc h3 { font-size: 1.05rem; }
+.doc-meta { font-size: .88rem; color: var(--muted); margin-top: 2px; }
+.doc > p { font-size: .92rem; margin: 14px 0 18px; flex: 1; }
+.lock { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #fef3c7; color: #92400e; margin-top: 8px; }
+.lock svg { width: 12px; height: 12px; }
+.doc-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 760px) { .docs { grid-template-columns: 1fr; } }
+
 /* EVENTS */
 .soon { display: flex; align-items: center; gap: 24px; background: #fff; border: 1px dashed #cbd5e1; border-radius: var(--radius); padding: 32px; }
 .soon-icon { flex: none; width: 56px; height: 56px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
@@ -174,6 +188,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
       <li><a href="#projects">Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#documents">Credentials</a></li>
       <!-- <li><a href="#events">Events</a></li> -->
       <li><a href="#contact" class="btn btn-primary btn-sm">Contact me</a></li>
     </ul>
@@ -402,7 +417,8 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
           <div class="edu-icon">MSc</div>
           <div>
             <h3>Master of Data Science</h3>
-            <p>Universiti Malaya · <span class="gpa">CGPA 3.98</span></p>
+            <p>Universiti Malaya · <span class="gpa">CGPA 3.98 · Pass with Distinction</span></p>
+            <p>Conferred March 2026 · <a href="#documents" style="color:var(--accent);font-weight:500">Documents on request</a></p>
           </div>
         </div>
         <div class="edu-item">
@@ -426,6 +442,49 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
   </div>
 </section>
 
+<!-- ACADEMIC DOCUMENTS (not published: they contain personal ID numbers, so visitors request a copy) -->
+<section class="block alt" id="documents">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Credentials</p>
+      <h2>Academic documents</h2>
+      <p>Official Universiti Malaya records for my Master of Data Science. They contain personal details, so I share them directly on request.</p>
+    </div>
+    <div class="docs">
+      <article class="doc reveal">
+        <div class="doc-top">
+          <div class="doc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+          <div>
+            <h3>Completion of Studies letter</h3>
+            <p class="doc-meta">Universiti Malaya · Senate approved 11 March 2026</p>
+            <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Available on request</span>
+          </div>
+        </div>
+        <p>Official confirmation that the Master of Data Science has been conferred: CGPA 3.98, Pass with Distinction.</p>
+        <div class="doc-actions">
+          <a class="btn btn-primary btn-sm" href="mailto:weeken69@gmail.com?subject=Request%3A%20Completion%20of%20Studies%20letter%20%E2%80%94%20Goh%20Wee%20Ken&amp;body=Hi%20Wee%20Ken%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20Could%20you%20please%20share%20a%20copy%20of%20your%20Completion%20of%20Studies%20letter%3F%0A%0AThank%20you.">Request by email</a>
+          <a class="btn btn-outline btn-sm" href="https://wa.me/60143012841?text=Hi%20Wee%20Ken%2C%20I%27d%20like%20to%20request%20a%20copy%20of%20your%20Completion%20of%20Studies%20letter." target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </article>
+      <article class="doc reveal">
+        <div class="doc-top">
+          <div class="doc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+          <div>
+            <h3>Academic transcript</h3>
+            <p class="doc-meta">Universiti Malaya · Master of Data Science</p>
+            <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Available on request</span>
+          </div>
+        </div>
+        <p>Module-by-module grades across 42 credits, including Applied Machine Learning, NLP, Big Data and Parallel Computing.</p>
+        <div class="doc-actions">
+          <a class="btn btn-primary btn-sm" href="mailto:weeken69@gmail.com?subject=Request%3A%20Academic%20transcript%20%E2%80%94%20Goh%20Wee%20Ken&amp;body=Hi%20Wee%20Ken%2C%0A%0AI%27m%20%5Bname%5D%20from%20%5Bcompany%5D.%20Could%20you%20please%20share%20a%20copy%20of%20your%20Academic%20transcript%3F%0A%0AThank%20you.">Request by email</a>
+          <a class="btn btn-outline btn-sm" href="https://wa.me/60143012841?text=Hi%20Wee%20Ken%2C%20I%27d%20like%20to%20request%20a%20copy%20of%20your%20Academic%20transcript." target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- EVENTS (hidden until events are added: remove the "hidden" attribute and uncomment the nav link) -->
 <section class="block alt" id="events" hidden>
   <div class="wrap">
@@ -445,7 +504,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 </section>
 
 <!-- CONTACT -->
-<section class="block" id="contact" style="padding-top:0">
+<section class="block" id="contact">
   <div class="wrap">
     <div class="contact reveal">
       <div>
