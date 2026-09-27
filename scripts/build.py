@@ -10,6 +10,7 @@ data/manual-projects.json.
 
 Set GITHUB_TOKEN to avoid the unauthenticated API rate limit.
 """
+import datetime
 import html
 import json
 import os
@@ -23,6 +24,8 @@ GITHUB_USER = "WeeKen99"
 CONTACT_EMAIL = "weeken69@gmail.com"
 TOPIC = "portfolio"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SITE_REPO = f"{GITHUB_USER}/{GITHUB_USER}.github.io"
+LOCAL_TZ = datetime.timezone(datetime.timedelta(hours=8))  # Malaysia time
 
 # Category used when a repo has no portfolio.json, picked from its topics
 TOPIC_CATEGORIES = {
@@ -90,6 +93,16 @@ def repo_projects():
             projects.append(e)
         print(f"  {repo['name']}: {len(entries)} card(s)")
     return projects
+
+
+def last_updated(projects):
+    # The newest content change: a push to any project repo on the page, or to this site repo.
+    # Deliberately not the build time, since the daily rebuild would otherwise always say "today".
+    stamps = [p["_pushed"] for p in projects if p.get("_pushed")]
+    commits = api(f"https://api.github.com/repos/{SITE_REPO}/commits?per_page=1")
+    stamps.append(commits[0]["commit"]["committer"]["date"])
+    newest = max(datetime.datetime.fromisoformat(s.replace("Z", "+00:00")) for s in stamps)
+    return newest.astimezone(LOCAL_TZ).date()
 
 
 def manual_projects():
@@ -179,18 +192,21 @@ def main():
 
     with open(os.path.join(ROOT, "src", "index.template.html"), encoding="utf-8") as f:
         page = f.read()
-    for marker in ("<!-- @FEATURED -->", "<!-- @PROJECTS -->", "@PROJECT_COUNT"):
+    updated = last_updated(projects)
+    for marker in ("<!-- @FEATURED -->", "<!-- @PROJECTS -->", "@PROJECT_COUNT", "@LAST_UPDATED_ISO"):
         if page.count(marker) != 1:
             sys.exit(f"Template must contain {marker} exactly once")
     page = page.replace("<!-- @FEATURED -->", "".join(featured_card(p) for p in featured).rstrip("\n"))
     page = page.replace("<!-- @PROJECTS -->", "\n".join(grid_card(p) for p in projects).rstrip("\n"))
     page = page.replace("@PROJECT_COUNT", str(len(projects)))
+    page = page.replace("@LAST_UPDATED_ISO", updated.isoformat())
+    page = page.replace("@LAST_UPDATED", f"{updated.day} {updated:%B %Y}")
 
     out = os.path.join(ROOT, "_site")
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, "index.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write(page)
-    print(f"Built _site/index.html: {len(projects)} projects, {len(featured)} featured")
+    print(f"Built _site/index.html: {len(projects)} projects, {len(featured)} featured, last updated {updated}")
 
 
 if __name__ == "__main__":
