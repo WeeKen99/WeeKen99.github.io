@@ -261,7 +261,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 
     <div class="stats">
       <div class="stat"><div class="stat-num" data-count="3.98" data-dec="2">3.98</div><div class="stat-label">Master's CGPA</div></div>
-      <div class="stat"><div class="stat-num" id="projCount">12</div><div class="stat-label">Projects built</div></div>
+      <div class="stat"><div class="stat-num" id="projCount">@PROJECT_COUNT</div><div class="stat-label">Projects built</div></div>
       <div class="stat"><div class="stat-num">MSc</div><div class="stat-label">Data Science, UM</div></div>
       <div class="stat"><div class="stat-num">BEng</div><div class="stat-label">Civil Engineering, USM</div></div>
     </div>
@@ -278,41 +278,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
     </div>
 
     <div class="featured">
-      <article class="fcard reveal">
-        <div class="fcard-img"><img src="https://raw.githubusercontent.com/WeeKen99/data-analytics-portfolio/main/01-renewable-energy-powerbi/images/dashboard-solar.png" alt="Power BI dashboard of solar energy data" loading="lazy"></div>
-        <div class="fcard-body">
-          <span class="cat">Data Engineering</span>
-          <h3>GCP Renewable Energy Pipeline</h3>
-          <p>End-to-end cloud pipeline: ingestion through Cloud Storage, transformation in Dataprep, warehousing in BigQuery and dashboards in Power BI.</p>
-          <div><span class="result">Raw files → BigQuery → Power BI</span></div>
-          <div class="tags"><span>GCP</span><span>BigQuery</span><span>Dataprep</span><span>Power BI</span></div>
-          <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/01-renewable-energy-powerbi" target="_blank" rel="noopener">View project →</a>
-        </div>
-      </article>
-
-      <article class="fcard reveal">
-        <div class="fcard-img"><img src="https://raw.githubusercontent.com/WeeKen99/data-analytics-portfolio/main/03-cardiovascular-ml-python/images/data-product-ui.png" alt="Cardiovascular risk screening tool interface" loading="lazy"></div>
-        <div class="fcard-body">
-          <span class="cat">Machine Learning</span>
-          <h3>Cardiovascular Risk Predictor</h3>
-          <p>Insurance underwriting triage on 70,000 patient records. Decision Tree, Random Forest and XGBoost tuned with GridSearchCV, then designed into a screening tool for agents.</p>
-          <div><span class="result">XGBoost · 73% accuracy · AUC 0.78</span></div>
-          <div class="tags"><span>Python</span><span>XGBoost</span><span>scikit-learn</span><span>pandas</span></div>
-          <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/03-cardiovascular-ml-python" target="_blank" rel="noopener">View project →</a>
-        </div>
-      </article>
-
-      <article class="fcard reveal">
-        <div class="fcard-img"><img src="https://img.youtube.com/vi/RdZNA-xoj5s/maxresdefault.jpg" alt="Demo video of the AI recruitment pipeline" loading="lazy"></div>
-        <div class="fcard-body">
-          <span class="cat">Automation</span>
-          <h3>AI Recruitment Automation Pipeline</h3>
-          <p>Hiring workflow on n8n: resume ingestion, Gemini AI scoring, automated shortlisting and candidate notification, with Google Sheets tracking.</p>
-          <div><span class="result">Automated CV screening end to end</span></div>
-          <div class="tags"><span>n8n</span><span>Gemini AI</span><span>Google Sheets</span></div>
-          <a class="link" href="https://github.com/WeeKen99/automated-recruitment-pipeline" target="_blank" rel="noopener">View project →</a>
-        </div>
-      </article>
+<!-- @FEATURED -->
     </div>
   </div>
 </section>
@@ -328,131 +294,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
     <div class="tabs reveal" id="tabs"></div>
 
     <div class="grid" id="grid">
-      <article class="pcard" data-cat="Data Engineering">
-        <span class="cat">Data Engineering</span>
-        <h3>GCP Renewable Energy Pipeline</h3>
-        <p>Cloud Storage ingestion, Dataprep transformation, BigQuery warehousing and Power BI dashboards for renewable energy data.</p>
-        <div><span class="result">4-stage cloud pipeline</span></div>
-        <div class="tags"><span>GCP</span><span>BigQuery</span><span>Dataprep</span><span>Power BI</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/01-renewable-energy-powerbi" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Machine Learning">
-        <span class="cat">Machine Learning · <span class="kaggle">Kaggle</span></span>
-        <h3>EV Purchase Prediction (Kaggle Playground)</h3>
-        <p>My first Kaggle competition: 669k rows, LightGBM and CatBoost with in-fold target encoding, binned and interaction features, and a 4-model blend.</p>
-        <div><span class="result">CV ROC AUC 0.9411 → 0.9460</span></div>
-        <div class="tags"><span>LightGBM</span><span>CatBoost</span><span>scikit-learn</span><span>Python</span></div>
-        <a class="link" href="https://github.com/WeeKen99/kaggle-ev-purchase-prediction" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Machine Learning">
-        <span class="cat">Machine Learning</span>
-        <h3>Real-Time Traffic Congestion Predictor</h3>
-        <p>Hybrid XGBoost and LSTM model for real-time congestion classification, served via FastAPI and shown on a 4-page Streamlit dashboard.</p>
-        <div><span class="result">94.5% accuracy (XGBoost)</span></div>
-        <div class="tags"><span>XGBoost</span><span>LSTM</span><span>FastAPI</span><span>Streamlit</span></div>
-        <a class="link" href="https://github.com/WeeKen99" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Machine Learning">
-        <span class="cat">Machine Learning</span>
-        <h3>Cardiovascular Risk Predictor</h3>
-        <p>Insurance triage model on 70,000 patient records, with GridSearchCV tuning and a risk-screening tool design for agents.</p>
-        <div><span class="result">73% accuracy · AUC 0.78</span></div>
-        <div class="tags"><span>Python</span><span>XGBoost</span><span>scikit-learn</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/03-cardiovascular-ml-python" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Machine Learning">
-        <span class="cat">Machine Learning</span>
-        <h3>Breast Cancer Diagnosis (SAS)</h3>
-        <p>13 Decision Tree, Neural Network and Logistic Regression configurations compared in SAS Enterprise Miner on the Wisconsin dataset.</p>
-        <div><span class="result">95.8% accuracy · ROC 0.995</span></div>
-        <div class="tags"><span>SAS Enterprise Miner</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/02-breast-cancer-sas" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Machine Learning">
-        <span class="cat">Machine Learning</span>
-        <h3>Alzheimer's Prediction Model</h3>
-        <p>XGBoost, SVM and Decision Trees benchmarked for early Alzheimer's detection, deployed as an interactive Streamlit app.</p>
-        <div><span class="result">93.8% accuracy · 92.5% recall</span></div>
-        <div class="tags"><span>XGBoost</span><span>SVM</span><span>Streamlit</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/04-alzheimer-prediction-ml" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Machine Learning">
-        <span class="cat">Machine Learning</span>
-        <h3>Customer Churn in Malaysian Telecom</h3>
-        <p>Churn project for the Malaysian telecom sector: EDA in R on NPS, service duration and revenue, plus a ChurnGuard AI retention dashboard design.</p>
-        <div><span class="result">Detractors churn the most</span></div>
-        <div class="tags"><span>R</span><span>ggplot2</span><span>dplyr</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/07-customer-churn-poster" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="NLP & RAG">
-        <span class="cat">NLP &amp; RAG</span>
-        <h3>Sentiment Analysis Pipeline</h3>
-        <p>Three phases on Amazon Beauty reviews: TF-IDF baseline, fine-tuned DistilBERT, then a full RAG system with FAISS and LLM synthesis.</p>
-        <div><span class="result">92% → 95% accuracy</span></div>
-        <div class="tags"><span>DistilBERT</span><span>FAISS</span><span>Python</span></div>
-        <a class="link" href="https://github.com/WeeKen99" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="NLP & RAG">
-        <span class="cat">NLP &amp; RAG</span>
-        <h3>Multilingual Hate Speech Detection</h3>
-        <p>mBERT and SVM classifier across 14 identity groups for content moderation, handling code-mixed and low-resource languages.</p>
-        <div><span class="result">14 identity groups</span></div>
-        <div class="tags"><span>mBERT</span><span>HuggingFace</span><span>Streamlit</span></div>
-        <a class="link" href="https://github.com/WeeKen99/content-moderation-app" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="NLP & RAG">
-        <span class="cat">NLP &amp; RAG</span>
-        <h3>Research Paper Q&amp;A Engine</h3>
-        <p>RAG pipeline for querying research papers: semantic chunking with sentence-transformers, FAISS vector search and LLM answers via Groq API.</p>
-        <div><span class="result">RAG with FAISS + Groq</span></div>
-        <div class="tags"><span>FAISS</span><span>FastAPI</span><span>Streamlit</span><span>Groq API</span></div>
-        <a class="link" href="https://github.com/WeeKen99" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Automation">
-        <span class="cat">Automation</span>
-        <h3>AI Recruitment Automation Pipeline</h3>
-        <p>n8n hiring workflow: resume ingestion, Gemini AI scoring, automated shortlisting and candidate notification.</p>
-        <div><span class="result">Automated CV screening</span></div>
-        <div class="tags"><span>n8n</span><span>Gemini AI</span></div>
-        <a class="link" href="https://github.com/WeeKen99/automated-recruitment-pipeline" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Software Engineering">
-        <span class="cat">Software Engineering</span>
-        <h3>Java E-commerce System</h3>
-        <p>Object-oriented online shop in plain Java: account registration and login, a stock-checked cart, checkout into orders, and shipment tracking with timestamped status history.</p>
-        <div><span class="result">9 classes · inheritance &amp; composition</span></div>
-        <div class="tags"><span>Java</span><span>OOP</span></div>
-        <a class="link" href="https://github.com/WeeKen99/java-ecommerce-oop" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Research">
-        <span class="cat">Research</span>
-        <h3>Big Data Management at PayPal</h3>
-        <p>Group case study of how PayPal handles 25B transactions a year: the 10 V's of big data, its data lifecycle, fraud detection and the move to Google Cloud.</p>
-        <div><span class="result">Big data strategy case study</span></div>
-        <div class="tags"><span>Big Data</span><span>Hadoop</span><span>Google Cloud</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/05-paypal-big-data-case-study" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="pcard" data-cat="Research">
-        <span class="cat">Research</span>
-        <h3>Healthcare Data Collection Poster</h3>
-        <p>Academic poster for SDG 3 on fixing poor data capture in healthcare: governance, standardised EHR entry, sample schemas and app mock-ups.</p>
-        <div><span class="result">SDG 3 academic poster</span></div>
-        <div class="tags"><span>Data Governance</span><span>UX Design</span></div>
-        <a class="link" href="https://github.com/WeeKen99/data-analytics-portfolio/tree/main/06-poster-healthcare-data-collection" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
+<!-- @PROJECTS -->
     </div>
   </div>
 </section>

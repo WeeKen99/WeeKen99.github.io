@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Real-Time Traffic Congestion Predictor",
+    "category": "Machine Learning",
+    "summary": "Hybrid XGBoost and LSTM model for real-time congestion classification, served via FastAPI and shown on a 4-page Streamlit dashboard.",
+    "result": "94.5% accuracy (XGBoost)",
+    "tags": [
+      "XGBoost",
+      "LSTM",
+      "FastAPI",
+      "Streamlit"
+    ],
+    "order": 30,
+    "link": "https://github.com/WeeKen99"
+  },
+  {
+    "title": "Sentiment Analysis Pipeline",
+    "category": "NLP & RAG",
+    "summary": "Three phases on Amazon Beauty reviews: TF-IDF baseline, fine-tuned DistilBERT, then a full RAG system with FAISS and LLM synthesis.",
+    "result": "92% → 95% accuracy",
+    "tags": [
+      "DistilBERT",
+      "FAISS",
+      "Python"
+    ],
+    "order": 80,
+    "link": "https://github.com/WeeKen99"
+  },
+  {
+    "title": "Research Paper Q&A Engine",
+    "category": "NLP & RAG",
+    "summary": "RAG pipeline for querying research papers: semantic chunking with sentence-transformers, FAISS vector search and LLM answers via Groq API.",
+    "result": "RAG with FAISS + Groq",
+    "tags": [
+      "FAISS",
+      "FastAPI",
+      "Streamlit",
+      "Groq API"
+    ],
+    "order": 100,
+    "link": "https://github.com/WeeKen99"
+  }
+]
