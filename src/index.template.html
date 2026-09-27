@@ -137,6 +137,19 @@ section.alt { background: var(--bg-soft); }
 .doc-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 @media (max-width: 760px) { .docs { grid-template-columns: 1fr; } }
 
+/* LEARNING */
+.certs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cert { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; }
+.cert-logo { height: 72px; border: 1px solid var(--line); border-radius: 12px; background: #fff; display: grid; place-items: center; padding: 12px 20px; margin-bottom: 18px; }
+.cert-logo img { max-height: 44px; max-width: 160px; width: auto; }
+.cert h3 { font-size: 1.08rem; }
+.cert-org { font-size: .88rem; color: var(--muted); margin-top: 4px; }
+.cert-date { display: inline-flex; align-items: center; gap: 7px; align-self: flex-start; margin: 12px 0 14px; padding: 4px 11px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: .8rem; font-weight: 600; }
+.cert-date::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.cert ul { padding-left: 18px; font-size: .92rem; display: grid; gap: 6px; }
+.cert li::marker { color: var(--accent); }
+@media (max-width: 960px) { .certs { grid-template-columns: 1fr; } .cert-logo { justify-content: start; } }
+
 /* EVENTS */
 .soon { display: flex; align-items: center; gap: 24px; background: #fff; border: 1px dashed #cbd5e1; border-radius: var(--radius); padding: 32px; }
 .soon-icon { flex: none; width: 56px; height: 56px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
@@ -161,7 +174,7 @@ footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: .8
 footer .dot-sep { margin: 0 6px; }
 
 /* JUSTIFIED BODY TEXT (headings, tags and buttons stay left-aligned) */
-.hero-sub, .sec-head p, .fcard p, .pcard p, .about-text p, .contact p {
+.hero-sub, .sec-head p, .fcard p, .pcard p, .about-text p, .contact p, .cert li {
   text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto;
 }
 
@@ -241,6 +254,7 @@ footer .dot-sep { margin: 0 6px; }
       <li><a href="#projects">Projects</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#learning">Learning</a></li>
       <li><a href="#documents">Credentials</a></li>
       <!-- <li><a href="#events">Events</a></li> -->
       <li><a href="#contact" class="btn btn-primary btn-sm">Contact me</a></li>
@@ -353,8 +367,49 @@ footer .dot-sep { margin: 0 6px; }
   </div>
 </section>
 
+<!-- LEARNING -->
+<section class="block alt" id="learning">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Currently learning</p>
+      <h2>Certifications &amp; professional development</h2>
+      <p>Programmes I'm taking alongside my projects to deepen my data, software and cloud skills.</p>
+    </div>
+    <div class="certs">
+      <article class="cert reveal">
+        <div class="cert-logo"><img src="assets/logos/utokyo.svg" alt="The University of Tokyo" loading="lazy"></div>
+        <h3>Global Consumer Intelligence (GCI) World</h3>
+        <p class="cert-org">The University of Tokyo</p>
+        <span class="cert-date">Sept 2026 – Present</span>
+        <ul>
+          <li>Developing practical skills in Python, data analysis, machine learning, SQL and data visualisation through structured coursework and hands-on assignments.</li>
+        </ul>
+      </article>
+      <article class="cert reveal">
+        <div class="cert-logo"><img src="assets/logos/42.svg" alt="42 school network" loading="lazy"></div>
+        <h3>42 Kuala Lumpur (42 KL)</h3>
+        <p class="cert-org">Sunway Education &amp; Khazanah Nasional</p>
+        <span class="cert-date">Sept 2026 – Present</span>
+        <ul>
+          <li>Developing programming and software engineering skills through project-based, peer-to-peer learning.</li>
+          <li>Strengthening algorithmic thinking, problem-solving and collaborative development through projects.</li>
+        </ul>
+      </article>
+      <article class="cert reveal">
+        <div class="cert-logo"><img src="assets/logos/aws.svg" alt="Amazon Web Services" loading="lazy"></div>
+        <h3>Project Cloud Ignite</h3>
+        <p class="cert-org">AWS × Exabytes Cloud Centre of Excellence (CCoE) × Forward College</p>
+        <span class="cert-date">Sept 2026 – Present</span>
+        <ul>
+          <li>Developing cloud computing skills through the industry-recognised AWS re/Start curriculum and hands-on training.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ACADEMIC DOCUMENTS (not published: they contain personal ID numbers, so visitors request a copy) -->
-<section class="block alt" id="documents">
+<section class="block" id="documents">
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="eyebrow">Credentials</p>
@@ -413,7 +468,7 @@ footer .dot-sep { margin: 0 6px; }
 </section>
 
 <!-- CONTACT -->
-<section class="block" id="contact">
+<section class="block" id="contact" style="padding-top:0">
   <div class="wrap">
     <div class="contact reveal zoom">
       <div>
@@ -462,7 +517,7 @@ onScroll();
 
 // Project cards also reveal; cards in the same row arrive one after another
 document.querySelectorAll('#grid .pcard').forEach(c => c.classList.add('reveal'));
-document.querySelectorAll('.featured, .grid, .skills, .docs').forEach(group => {
+document.querySelectorAll('.featured, .grid, .skills, .docs, .certs').forEach(group => {
   [...group.children].forEach((el, i) => el.style.setProperty('--d', `${(i % 3) * 0.1}s`));
 });
 

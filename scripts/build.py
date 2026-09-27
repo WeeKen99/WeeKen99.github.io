@@ -15,6 +15,7 @@ import html
 import json
 import os
 import re
+import shutil
 import sys
 import urllib.error
 import urllib.parse
@@ -204,6 +205,7 @@ def main():
 
     out = os.path.join(ROOT, "_site")
     os.makedirs(out, exist_ok=True)
+    shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(out, "assets"), dirs_exist_ok=True)
     with open(os.path.join(out, "index.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write(page)
     print(f"Built _site/index.html: {len(projects)} projects, {len(featured)} featured, last updated {updated}")
