@@ -39,5 +39,20 @@
     ],
     "order": 100,
     "link": "https://github.com/WeeKen99"
+  },
+  {
+    "title": "CatatMD: AI Clinical Note Assistant",
+    "category": "NLP & RAG",
+    "badge": "Team project",
+    "summary": "Turns a GP consultation transcript into a reviewable clinical note, with red-flag detection and guideline-cited suggestions. My role: the business side, covering guideline licensing (AMM, NICE, Singapore MOH), practising-GP interviews and competitor positioning.",
+    "result": "Live demo · 4-person team",
+    "tags": [
+      "LLM",
+      "Speech recognition",
+      "TypeScript",
+      "Healthcare"
+    ],
+    "link": "https://github.com/AlaskanTuna/catatmd",
+    "order": 25
   }
 ]

@@ -29,7 +29,7 @@ The site picks it up within a day. To update it straight away, go to **Actions �
 | `summary` | yes | Card description |
 | `result` | no | The blue highlight line, e.g. an accuracy score |
 | `tags` | no | Tool chips at the bottom of the card |
-| `badge` | no | Small label after the category, e.g. `"Kaggle"` |
+| `badge` | no | Small label after the category, e.g. `"Kaggle"` or `"Team project"` |
 | `order` | no | Position in the list (current projects use 10, 20, 30…). Projects without it appear first, newest first |
 | `path` | no | Subfolder the card links to, for a repo that holds several projects |
 | `featured` | no | Shows the project in the top 3 with a screenshot: `{"image": "images/screenshot.png", "imageAlt": "...", "summary": "...", "result": "..."}`. Only the first 3 featured projects (by `order`) are shown |
@@ -38,7 +38,7 @@ A repo with several projects can use a list of these objects, each with its own 
 
 Without `portfolio.json`, a tagged repo still gets a card from its GitHub description, language and topics.
 
-Projects that have no public repo are listed in [`data/manual-projects.json`](data/manual-projects.json).
+Projects that have no public repo are listed in [`data/manual-projects.json`](data/manual-projects.json). Entries there need a `link`, or `"private": true` to show a "Private repo · request details" email link instead. Team projects in other people's repos go there too, with `"badge": "Team project"`.
 
 ## Editing the rest of the page
 

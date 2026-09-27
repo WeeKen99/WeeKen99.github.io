@@ -16,9 +16,11 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 GITHUB_USER = "WeeKen99"
+CONTACT_EMAIL = "weeken69@gmail.com"
 TOPIC = "portfolio"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -104,8 +106,19 @@ def tags_html(tags):
 
 
 def category_html(p):
-    badge = f' · <span class="kaggle">{esc(p["badge"])}</span>' if p.get("badge") else ""
+    if not p.get("badge"):
+        return esc(p["category"])
+    slug = re.sub(r"[^a-z0-9]+", "-", p["badge"].lower()).strip("-")
+    badge = f' · <span class="pbadge {slug}">{esc(p["badge"])}</span>'
     return f"{esc(p['category'])}{badge}"
+
+
+def link_html(p, label, indent):
+    # Private projects can't be opened by visitors, so offer to share details instead of a 404 link.
+    if p.get("private"):
+        subject = urllib.parse.quote(f"Request: details of {p['title']}")
+        return f'{indent}<a class="link" href="mailto:{CONTACT_EMAIL}?subject={subject}">Private repo · request details →</a>\n'
+    return f'{indent}<a class="link" href="{esc(p["link"])}" target="_blank" rel="noopener">{label}</a>\n'
 
 
 def result_html(result, indent):
@@ -120,8 +133,8 @@ def grid_card(p):
         f'        <p>{esc(p["summary"])}</p>\n'
         + result_html(p.get("result"), "        ")
         + f'        <div class="tags">{tags_html(p.get("tags", []))}</div>\n'
-        f'        <a class="link" href="{esc(p["link"])}" target="_blank" rel="noopener">View on GitHub →</a>\n'
-        f'      </article>\n'
+        + link_html(p, "View on GitHub →", "        ")
+        + f'      </article>\n'
     )
 
 
@@ -136,8 +149,8 @@ def featured_card(p):
         f'          <p>{esc(f.get("summary", p["summary"]))}</p>\n'
         + result_html(f.get("result", p.get("result")), "          ")
         + f'          <div class="tags">{tags_html(f.get("tags", p.get("tags", [])))}</div>\n'
-        f'          <a class="link" href="{esc(p["link"])}" target="_blank" rel="noopener">View project →</a>\n'
-        f'        </div>\n'
+        + link_html(p, "View project →", "          ")
+        + f'        </div>\n'
         f'      </article>\n'
     )
 
@@ -153,8 +166,8 @@ def sort_projects(projects):
 def main():
     print("Reading repos tagged '%s'..." % TOPIC)
     projects = repo_projects() + manual_projects()
-    required = ("title", "category", "summary", "link")
     for p in projects:
+        required = ("title", "category", "summary") + (() if p.get("private") else ("link",))
         missing = [k for k in required if not p.get(k)]
         if missing:
             sys.exit(f"Project {p.get('title', '?')} is missing {missing}")
